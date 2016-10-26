@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "axios": "^0.15.2",
     "express": "^4.14.0",
-    "irc": "^0.5.0"
+    "irc": "^0.5.0",
+    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
