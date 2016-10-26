@@ -10,9 +10,7 @@ client.addListener('message', (from, to, message) => {
 })
 
 client.addListener('message#parrot', (from, message) => {
-  console.log(from, message)
-
-  client.say('#parrot', message)
+  client.notice('#parrot', message)
 })
 
 client.addListener('message#compare', (from, message) => {
@@ -41,7 +39,6 @@ client.addListener('message#gifs', (from, message) => {
         c(data.image_url)
       })
   } else {
-    console.log('els')
     fetch(`http://api.giphy.com/v1/gifs/search?q=${encodeURIComponent(keywords)}&api_key=dc6zaTOxFJmzC`)
       .then(res => res.json())
       .then(({ data }) => {
