@@ -1,7 +1,6 @@
 {
   "name": "nodeschool-bot",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
     "express": "^4.14.0",
@@ -16,5 +15,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimonVS/nodeschool-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TimonVS/nodeschool-bot/issues"
+  },
+  "homepage": "https://github.com/TimonVS/nodeschool-bot#readme",
+  "description": ""
 }

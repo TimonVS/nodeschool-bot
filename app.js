@@ -2,18 +2,24 @@ const irc = require('irc')
 const fetch = require('node-fetch')
 
 const client = new irc.Client('bofh.nl.smurfnet.ch', 'Nodeschool', {
-    channels: ['#parrot', '#compare', '#gifs']
+  channels: ['#parrot', '#compare', '#gifs']
 })
 
+// Listens to ALL channels provided above, the `to` paramater contains the channel the
+// message was sent to
 client.addListener('message', (from, to, message) => {
   console.log(from + ' => ' + to + ': ' + message)
 })
 
+// Listens to the #parrot channel, doesn't contain a `to` parameter because it's already
+// known that the message was sent to the #parrot channel
 client.addListener('message#parrot', (from, message) => {
   client.notice('#parrot', message)
 })
 
 client.addListener('message#compare', (from, message) => {
+  // Creates a new function that already has the channel parameter
+  // `c('this is a message')` equals client.say('#compare', 'this is a message')
   const c = client.say.bind(client, '#compare')
 
   if (message === '(╯°□°)╯︵ ┻━┻') {
@@ -30,16 +36,17 @@ client.addListener('message#gifs', (from, message) => {
 
   if (!message.startsWith('gif')) return
 
-  const [_, keywords] = message.split(' ')
+  const [_, ...keywords] = message.split(' ')
 
-  if (!keywords) {
+  // Send a random gif if there are no keywords
+  if (keywords.length === 0) {
     fetch('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC')
       .then(res => res.json())
       .then(({ data }) => {
         c(data.image_url)
       })
   } else {
-    fetch(`http://api.giphy.com/v1/gifs/search?q=${encodeURIComponent(keywords)}&api_key=dc6zaTOxFJmzC`)
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${encodeURIComponent(keywords.join(' '))}&api_key=dc6zaTOxFJmzC`)
       .then(res => res.json())
       .then(({ data }) => {
         c(data[0].images.fixed_height.url)
