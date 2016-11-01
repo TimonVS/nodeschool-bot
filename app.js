@@ -1,6 +1,7 @@
 const irc = require('irc')
 const fetch = require('node-fetch')
 
+// Setup the connection to an IRC server
 const client = new irc.Client('bofh.nl.smurfnet.ch', 'Nodeschool', {
   channels: ['#parrot', '#compare', '#gifs']
 })
